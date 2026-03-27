@@ -1,33 +1,120 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>CSC316</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sidney Crosby — Career Chronicle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-		<!-- Load CSS libraries -->
-		<!-- TODO: Add Bootstrap css -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<!-- Season story scrolly overlay on click -->
+<div id="season-story-overlay" class="story-overlay">
+    <div id="season-story-backdrop" class="story-overlay-backdrop"></div>
 
-		<!-- Completed: custom css included -->
-		<link rel="stylesheet" href="css/style.css">
+    <div class="story-overlay-panel">
+        <div class="story-overlay-header">
+            <div>
+                <h2 id="story-title">Season Story</h2>
+                <p id="story-subtitle" class="story-subtitle"></p>
+            </div>
+            <button id="close-story-overlay" class="story-close-btn" title="Close">✕</button>
+        </div>
 
-		<!-- GOOGLE FONTS -->
-		<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,400italic,300italic' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
-	</head>
+        <div id="story-scrolly" class="story-scrolly">
+            <article id="story-steps"></article>
 
-	<body>
-		<!-- TODO: Add Bootstrap js -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+            <figure id="story-figure">
+                <div id="story-figure-inner">
+                    <svg id="story-chart"></svg>
+                    <div id="story-figure-caption" class="story-figure-caption"></div>
+                </div>
+            </figure>
+        </div>
+    </div>
+</div>
 
-            
-		
-		
-		
+<!-- main viz -->
+<div class="container-fluid">
+    <!-- career chart -->
+    <div class="row section-row">
+    <div class="col-12">
+        <div class="panel-header">
+            <div class="panel-header-row">
+                <div>
+                    <h2>Regular Season Career Arc</h2>
+                    <p class="panel-desc">
+                        Select a metric and situation, then <strong>select a season</strong>
+                        to see more details about that season.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-		<!-- Completed: d3 included -->
-		<script src="https://d3js.org/d3.v7.min.js"></script>
-	</body>
+    <!-- split the layout with crosby on the left and viz on the right-->
+    <div class="col-12">
+        <div class="career-layout">
+
+            <!-- crosby pic -->
+            <div class="career-left">
+                <div class="image-placeholder">
+                    <p>hockey card style graphic showing overall stats</p>
+                </div>
+                
+                <div class="col">
+                    <h1>Crosby title</h1>
+                    <p class="subtitle">interesting tagline, tags for wards won etc</p>
+                </div>
+            </div>
+
+            <!-- career chart -->
+            <div class="career-right">
+
+                <div class="controls-row">
+                    <div class="control-group">
+                        <span class="control-label">Metric</span>
+                        <div id="metric-selector" class="btn-group" role="group">
+                            <button class="btn btn-sm btn-ctrl active" data-metric="points">Points</button>
+                            <button class="btn btn-sm btn-ctrl" data-metric="goals">Goals</button>
+                            <button class="btn btn-sm btn-ctrl" data-metric="assists">Assists</button>
+                            <button class="btn btn-sm btn-ctrl" data-metric="xGoals">xGoals</button>
+                            <button class="btn btn-sm btn-ctrl" data-metric="avgGameScore">Avg GameScore</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <span class="control-label">Strength</span>
+                        <div id="situation-selector" class="btn-group" role="group">
+                            <button class="btn btn-sm btn-ctrl active" data-sit="all">All Sit.</button>
+                            <button class="btn btn-sm btn-ctrl" data-sit="5v5">Even</button>
+                            <button class="btn btn-sm btn-ctrl" data-sit="pp">Power Play</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <span class="control-label">View</span>
+                        <div id="cumulative-selector" class="btn-group" role="group">
+                            <button class="btn btn-sm btn-ctrl active" data-cumul="false">Per Season</button>
+                            <button class="btn btn-sm btn-ctrl" data-cumul="true">Cumulative</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="career-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://unpkg.com/scrollama"></script>
+
+<script src="js/seasonStoryOverlay.js"></script>
+<script src="js/careerChart.js"></script>
+<script src="js/main.js"></script>
+</body>
 </html>

@@ -1,0 +1,37 @@
+[
+  {
+    "season": 2009,
+    "label": "Stanley Cup",
+    "type": "championship"
+  },
+  {
+    "season": 2011,
+    "label": "Concussion",
+    "type": "injury"
+  },
+  {
+    "season": 2012,
+    "label": "Lockout",
+    "type": "lockout"
+  },
+  {
+    "season": 2016,
+    "label": "Stanley Cup",
+    "type": "championship"
+  },
+  {
+    "season": 2017,
+    "label": "Stanley Cup",
+    "type": "championship"
+  },
+  {
+    "season": 2020,
+    "label": "COVID",
+    "type": "lockout"
+  },
+  {
+    "season": 2021,
+    "label": "COVID",
+    "type": "lockout"
+  }
+]
