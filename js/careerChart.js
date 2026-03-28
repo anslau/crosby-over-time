@@ -17,12 +17,12 @@ class CareerChart {
 
         vis.ANIM_DURATION = 3000;
 
-        vis.margin = { top: 60, right: 40, bottom: 50, left: 60 };
-        vis.brushMargin = { top: 20, right: 40, bottom: 55, left: 60 };
+        vis.margin = { top: 40, right: 40, bottom: 42, left: 56 };
+        vis.brushMargin = { top: 14, right: 40, bottom: 46, left: 56 };
         vis.width = document.getElementById(vis.parentElement)
                     .getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        vis.height = 280 - vis.margin.top  - vis.margin.bottom;
-        vis.brushHeight = 230 - vis.brushMargin.top - vis.brushMargin.bottom;
+        vis.height = 450 - vis.margin.top  - vis.margin.bottom;
+        vis.brushHeight = 165 - vis.brushMargin.top - vis.brushMargin.bottom;
 
         // init the drawing area
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -32,10 +32,9 @@ class CareerChart {
             .append("g")
             .attr("transform", `translate(${vis.margin.left},${vis.margin.top})`);
 
-        // init the area for the brushed panel
+        // init the area for the brushed panel 
         vis.brushPanel = d3.select("#" + vis.parentElement).append("div")
-            .attr("class", "brush-panel")
-            .style("display", "none");
+            .attr("class", "brush-panel");
 
         vis.brushPanel.append("div").attr("class", "brush-label").text("Monthly breakdown");
 
@@ -79,7 +78,7 @@ class CareerChart {
         vis.yLabel = vis.svg.append("text")
             .attr("class", "axis-label")
             .attr("transform", "rotate(-90)")
-            .attr("x", -vis.height / 2).attr("y", -50)
+            .attr("x", -vis.height / 2).attr("y", -44)
             .attr("text-anchor", "middle");
 
         // brushed chart axes
@@ -100,7 +99,7 @@ class CareerChart {
         vis.yLabelBrush = vis.brushSvg.append("text")
             .attr("class", "axis-label")
             .attr("transform", "rotate(-90)")
-            .attr("x", -vis.brushHeight / 2).attr("y", -50)
+            .attr("x", -vis.brushHeight / 2).attr("y", -44)
             .attr("text-anchor", "middle");
 
         // line path for the main chart
@@ -186,7 +185,11 @@ class CareerChart {
     wrangleData() {
         let vis = this;
 
-        // metrics to filter by
+        // metrics to filter by.
+        // only goals and xGoals have situation-split fields in the dataset;
+        // points, assists, and avgGameScore have no 5v5/PP breakdown so they always
+        // use the all-situation field — main.js blocks those combos in the UI,
+        // but the fallback here prevents silently showing the wrong data
         const metricMap = {
             all: { 
                    points:"points",
@@ -196,18 +199,18 @@ class CareerChart {
                    avgGameScore:"avgGameScore" 
                 },
             "5v5": { 
-                    points:"goals5v5", 
                     goals:"goals5v5",
-                    assists:"goals5v5",
                     xGoals:"xGoals5v5",
-                    avgGameScore:"avgGameScore" 
+                    points:"points",            // no 5v5 split — fall back to all-sit
+                    assists:"assists",          // no 5v5 split — fall back to all-sit
+                    avgGameScore:"avgGameScore" // no 5v5 split — fall back to all-sit
                 },
             pp: {
-                    points:"goalsPP",  
-                    goals:"goalsPP", 
-                    assists:"goalsPP",
-                    xGoals:"xGoalsPP", 
-                    avgGameScore:"avgGameScore" 
+                    goals:"goalsPP",
+                    xGoals:"xGoalsPP",
+                    points:"points",            // no PP split — fall back to all-sit
+                    assists:"assists",          // no PP split — fall back to all-sit
+                    avgGameScore:"avgGameScore" // no PP split — fall back to all-sit
                 },
         };
 
@@ -288,10 +291,10 @@ class CareerChart {
         vis._buildAnnotations();
         vis._buildDots();
 
-        // reset the brush
+        // reset the brush — hide the panel via class (not display) to avoid layout shift
         vis.brushGroup.call(vis.brush.move, null);
         vis._brushSelection = null;
-        vis.brushPanel.style("display", "none");
+        vis.brushPanel.classed("active", false);
 
         requestAnimationFrame(() => vis.playAnimation());
     }
@@ -304,7 +307,7 @@ class CareerChart {
         // first check if no selection exists, then reset the brush state
         if (!sel) {
             vis._brushSelection = null;
-            vis.brushPanel.style("display", "none");
+            vis.brushPanel.classed("active", false);
             vis.brushPrompt.text("↔ Drag to zoom into a range of seasons");
             return;
         }
@@ -366,7 +369,7 @@ class CareerChart {
             entry.count += 1;
         });
 
-        // sort by month and compute the avg value
+        // sort by month and compute the avg value
         const monthData = Array.from(monthMap.values())
             .sort((a, b) => a.month - b.month)
             .map(d => ({
@@ -384,7 +387,8 @@ class CareerChart {
             });
         }
 
-        vis.brushPanel.style("display", "block");
+        // reveal the panel via class — height is always reserved so no layout shift
+        vis.brushPanel.classed("active", true);
 
         // scales for the brushed area
         vis.xBrush.domain(d3.extent(monthData, d => d.month));

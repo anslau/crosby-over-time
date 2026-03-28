@@ -213,7 +213,7 @@ class SeasonStoryOverlay {
                 key: "danger",
                 title: "Where the Goals Came From",
                 text: `${stats.pctHigh}% of his goals this season came from high-danger areas (the slot and crease front). High-danger chances are the hardest to generate and the most likely to score. This chart compares actual goals to expected goals across each danger zone.`,
-                caption: "Actual goals vs. xGoals by shot danger zone."
+                caption: "Actual goals vs. xGoals (expected goals - the probability of a shot resulting in a goal) by shot danger zone."
             },
             {
                 key: "home-away",
@@ -323,7 +323,7 @@ class SeasonStoryOverlay {
             .on("mousemove", (event, d) => this._showTooltip(event,
                 `<strong>vs ${d.opponent}</strong> (${d.homeAway})<br>
                  ${d.parsedDate ? this.formatDate(d.parsedDate) : d.gameDate}<br>
-                 Points: ${d.points} &nbsp; Goals: ${d.goals}<br>
+                 Points: ${d.points} &nbsp; <br> Goals: ${d.goals}<br>
                  GameScore: ${(d.gameScore||0).toFixed(2)}`))
             .on("mouseout", () => this.tooltip.style("opacity", 0))
             .transition().duration(350).delay((d, i) => i * 7)
