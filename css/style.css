@@ -1,21 +1,26 @@
 body {
     background: #000000;
     color: #FFFFFF;
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
 }
 
 .header-row { padding: 36px 0 20px; }
 
 h1 {
-    font-size: 2rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 5rem;        
     font-weight: 700;
+    letter-spacing: 0.04em;  
     color: #FCB514;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
 .subtitle {
     color: #CFC493;
-    font-size: 0.95rem;
+    font-size: 1.05rem;     
+    font-weight: 500;
+    font-style: italic;
 }
 
 /* panels */
@@ -28,15 +33,20 @@ h1 {
 }
 
 .panel-header h2 {
-    font-size: 1.2rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
     color: #FCB514;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 
 .panel-desc {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: #CFC493;
-    margin-bottom: 2px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-style: italic;
 }
 
 .panel-header-row {
@@ -63,9 +73,10 @@ h1 {
 }
 
 .control-label {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #CFC493;
     white-space: nowrap;
+    font-weight: bold;
 }
 
 .btn-ctrl {
@@ -104,7 +115,8 @@ h1 {
 /* axes */
 .axis text {
     fill: #CFC493;
-    font-size: 11px;
+    font-size: 12.5px; 
+    font-weight: 500;
 }
 
 .axis line,
@@ -114,7 +126,9 @@ h1 {
 
 .axis-label {
     fill: #E6DDC7;
-    font-size: 12px;
+    font-size: 14px; 
+    font-weight: 600;
+    letter-spacing: 0.03em;
 }
 
 /* season dots */
@@ -184,12 +198,11 @@ h1 {
 }
 
 .brush-label {
-    font-size: 11px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     color: #FCB514;
-    letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 0 0 4px 64px;
-    opacity: 0.85;
 }
 
 .brush-dot { cursor: default; }
@@ -347,9 +360,10 @@ h1 {
 }
 
 .story-overlay-header h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #FCB514;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
 }
 
 .story-subtitle {
@@ -450,16 +464,14 @@ h1 {
 }
 
 .story-step h3 {
-    margin: 0 0 0.6rem 0;
-    color: #FCB514;
-    font-size: 1.15rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
 }
 
 .story-step p {
-    margin: 0;
-    color: #FFFFFF;
-    line-height: 1.65;
-    font-size: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
 }
 
 .story-axis path,

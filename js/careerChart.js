@@ -21,7 +21,7 @@ class CareerChart {
         vis.brushMargin = { top: 14, right: 40, bottom: 46, left: 56 };
         vis.width = document.getElementById(vis.parentElement)
                     .getBoundingClientRect().width - vis.margin.left - vis.margin.right;
-        vis.height = 450 - vis.margin.top  - vis.margin.bottom;
+        vis.height = 500 - vis.margin.top  - vis.margin.bottom;
         vis.brushHeight = 165 - vis.brushMargin.top - vis.brushMargin.bottom;
 
         // init the drawing area
